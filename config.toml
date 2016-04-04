@@ -1,0 +1,42 @@
+baseurl = "http://everttimberg.io/"
+languageCode = "en-us"
+theme = "evinson"
+title = "Evert Timberg"
+
+[params]
+	author = "Evert Timberg"
+	title = "Evert Timberg"
+	subtitle = "Software engineer"
+	mainImagePath = "/images/main_profile_pic.png"
+
+[menu]
+	# Items shown on home page
+	[[menu.main]]
+		url = "/about/"
+		name = "About"
+	[[menu.main]]
+		url = "/projects/"
+		name = "Projects"
+	[[menu.main]]
+		url = "/photography/"
+		name = "Photography"
+	[[menu.main]]
+		url = "/posts/"
+		name = "Blog"
+	
+	# Side menu
+	[[menu.side]]
+		name = "About"
+		url = "/about/"
+
+	[[menu.side]]
+		name = "Projects"
+		url = "/projects/"
+
+	[[menu.side]]
+		name = "Photography"
+		url = "/photography/"
+
+	[[menu.side]]
+		name = "Blog"
+		url = "/posts/"
