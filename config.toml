@@ -40,3 +40,9 @@ title = "Evert Timberg"
 	[[menu.side]]
 		name = "Blog"
 		url = "/posts/"
+
+# Social Media Links
+[Social]
+	github = "etimberg"
+	linkedin = "etimberg"
+	twitter = "EvertTimberg"
