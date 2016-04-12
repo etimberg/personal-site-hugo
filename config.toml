@@ -14,32 +14,44 @@ title = "Evert Timberg"
 	[[menu.main]]
 		url = "/about/"
 		name = "About"
+		Weight = 0
+		Identifier = "about"
 	[[menu.main]]
 		url = "/projects/"
 		name = "Projects"
+		Weight = 1
+		Identifier = "projects"
 	[[menu.main]]
-		url = "/photography/"
+		url = "/album/"
 		name = "Photography"
+		Weight = 2
+		Identifier = "photography"
 	[[menu.main]]
 		url = "/posts/"
 		name = "Blog"
+		Weight = 3
+		Identifier = "blog"
 	
 	# Side menu
 	[[menu.side]]
 		name = "About"
 		url = "/about/"
+		Weight = 0
 
 	[[menu.side]]
 		name = "Projects"
 		url = "/projects/"
+		Weight = 1
 
 	[[menu.side]]
 		name = "Photography"
-		url = "/photography/"
+		url = "/album/"
+		Weight = 2
 
 	[[menu.side]]
 		name = "Blog"
 		url = "/posts/"
+		Weight = 3
 
 # Social Media Links
 [Social]
