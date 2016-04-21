@@ -47,6 +47,7 @@ title = "Evert Timberg"
 		name = "Photography"
 		url = "/album/"
 		Weight = 2
+		Identifier = "photography"
 
 	[[menu.side]]
 		name = "Blog"

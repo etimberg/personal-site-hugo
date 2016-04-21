@@ -3,6 +3,9 @@ Weight = 0
 date = "2016-04-10T16:37:15-04:00"
 coverImageSrc = "/images/toronto/toronto5_thumb.png"
 title = "Exploring Toronto"
+
+[menu.main]
+    parent = "photography"
 +++
 
 {{< albumimage src="/images/toronto/toronto1.png" thumb="/images/toronto/toronto1_thumb.png" title="test">}}
