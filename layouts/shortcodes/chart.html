@@ -1,0 +1,5 @@
+<canvas id="{{ .Get "id" }} "></canvas>
+<script>
+var ctx = document.getElementById({{ .Get "id" }}).getContext('2d');
+var chartInstance = new Chart(ctx, {{ .Inner }});
+</script>

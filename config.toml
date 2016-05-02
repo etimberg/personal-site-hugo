@@ -17,7 +17,7 @@ title = "Evert Timberg"
 		Weight = 0
 		Identifier = "about"
 	[[menu.main]]
-		url = "/projects/"
+		url = "/project/"
 		name = "Projects"
 		Weight = 1
 		Identifier = "projects"
@@ -40,7 +40,7 @@ title = "Evert Timberg"
 
 	[[menu.side]]
 		name = "Projects"
-		url = "/projects/"
+		url = "/project/"
 		Weight = 1
 
 	[[menu.side]]
