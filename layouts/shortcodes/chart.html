@@ -1,5 +1,7 @@
-<canvas id="{{ .Get "id" }} "></canvas>
+<div class="chart-container">
+	<canvas id="{{ .Get "id" }}" class="{{ .Get "class" }}"></canvas>
+</div>
 <script>
 var ctx = document.getElementById({{ .Get "id" }}).getContext('2d');
-var chartInstance = new Chart(ctx, {{ .Inner }});
+var chartInstance = new Chart(ctx, {{ .Inner | safeJS }});
 </script>
