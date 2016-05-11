@@ -4,6 +4,9 @@ Weight = 1
 +++
 In early May 2016, I wrote a [Zoom and Pan plugin](https://github.com/chartjs/Chart.Zoom.js) to work with the new plugin system introduced in Chart.js v2.1.0. The plugin is touch ready and allows the use of gestures, such as pinch, to zoom the chart. Take a look at the chart below and try it out!
 
+<br>
+In the future I think the zoom plugin will make a good reference as to what plugins can look like. It's already help other to create plugins for Chart.js including a great one for [creating gradient fills](https://github.com/bbc/Chart.Bands.js) based on scale values. I'm looking forward to what the community can build over time.
+
 {{< chart id="zoom-chart" class="large-chart" >}}
 {
     type: 'scatter',
@@ -45,6 +48,9 @@ In early May 2016, I wrote a [Zoom and Pan plugin](https://github.com/chartjs/Ch
                 },
                 ticks: {
                     maxRotation: 0,
+                    callback: function(tick) {
+                        return tick.toFixed(1);
+                    }
                 }
             }],
             yAxes: [{
@@ -57,7 +63,10 @@ In early May 2016, I wrote a [Zoom and Pan plugin](https://github.com/chartjs/Ch
                     labelString: 'y axis'
                 },
                 ticks: {
-                    reverse: true
+                    reverse: true,
+                    callback: function(tick) {
+                        return tick.toFixed(1);
+                    }
                 }
             }]
         },
