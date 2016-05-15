@@ -42,10 +42,6 @@ In the future I think the zoom plugin will make a good reference as to what plug
                 gridLines: {
                     zeroLineColor: "rgba(0,255,0,1)"
                 },
-                scaleLabel: {
-                    display: true,
-                    labelString: 'x axis'
-                },
                 ticks: {
                     maxRotation: 0,
                     callback: function(tick) {
@@ -57,10 +53,6 @@ In the future I think the zoom plugin will make a good reference as to what plug
                 position: 'left',
                 gridLines: {
                     zeroLineColor: "rgba(0,255,0,1)"
-                },
-                scaleLabel: {
-                    display: true,
-                    labelString: 'y axis'
                 },
                 ticks: {
                     reverse: true,

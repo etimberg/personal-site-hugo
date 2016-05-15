@@ -8,7 +8,7 @@ title = "Exploring Toronto"
     parent = "photography"
 +++
 
-{{< albumimage src="/images/toronto/toronto1.png" thumb="/images/toronto/toronto1_thumb.png" title="test">}}
+{{< albumimage src="/images/toronto/toronto1.png" thumb="/images/toronto/toronto1_thumb.png" >}}
 
 {{< albumimage src="/images/toronto/toronto2.png" thumb="/images/toronto/toronto2_thumb.png" >}}
 
