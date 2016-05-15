@@ -27,7 +27,7 @@ title = "Evert Timberg"
 		Weight = 2
 		Identifier = "photography"
 	[[menu.main]]
-		url = "/posts/"
+		url = "/post/"
 		name = "Blog"
 		Weight = 3
 		Identifier = "blog"
@@ -51,7 +51,7 @@ title = "Evert Timberg"
 
 	[[menu.side]]
 		name = "Blog"
-		url = "/posts/"
+		url = "/post/"
 		Weight = 3
 
 # Social Media Links
