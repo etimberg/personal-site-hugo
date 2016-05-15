@@ -2,6 +2,7 @@ baseurl = "http://everttimberg.io/"
 languageCode = "en-us"
 theme = "evinson"
 title = "Evert Timberg"
+googleAnalytics = "UA-77722793-1"
 
 [params]
 	author = "Evert Timberg"
