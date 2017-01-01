@@ -7,7 +7,7 @@ googleAnalytics = "UA-77722793-1"
 [params]
 	author = "Evert Timberg"
 	title = "Evert Timberg"
-	subtitle = "Software engineer"
+	subtitle = "Software developer"
 	mainImagePath = "/images/main_profile_pic.png"
 
 [menu]

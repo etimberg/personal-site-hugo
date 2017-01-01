@@ -3,10 +3,10 @@ date = "2016-03-30T18:54:01-04:00"
 title = "About Me"
 +++
 {{< image src="/images/about_profile.png" class="highlight-image" >}}
-Hi, I'm **Evert Timberg**. I'm a software engineer living in Toronto, Canada.
+Hi, I'm **Evert Timberg**. I'm a software developer living in Toronto, Canada.
 
 <br>
-I am currently working for National Instruments as a Staff Software Engineer. I started at NI soon after graduating from the University of Toronto in 2013 with a BASc in Electrical Engineering. 
+I am currently working for National Instruments as a Staff Software Developer. I started at NI soon after graduating from the University of Toronto in 2013 with a BASc in Electrical Engineering. 
 
 <br>
 Initially I worked on [Multisim](https://en.wikipedia.org/wiki/NI_Multisim) which is primarily written in C++. I had a chance to work on some fairly old legacy code, including the Berkeley [SPICE](https://en.wikipedia.org/wiki/SPICE) engine. 
