@@ -8,7 +8,7 @@ googleAnalytics = "UA-77722793-1"
 	author = "Evert Timberg"
 	title = "Evert Timberg"
 	subtitle = "Software developer"
-	mainImagePath = "/images/main_profile_pic.png"
+	mainImagePath = "/images/main_profile_pic_thumb.png"
 
 [menu]
 	# Items shown on home page
