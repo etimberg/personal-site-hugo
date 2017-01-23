@@ -9,6 +9,34 @@ date = "2017-01-21T12:48:35-05:00"
     <img class="plain" src="/images/chartjs/chartjs-logo.svg" style="background: transparent;"></img>
 </section>
 <section>
+    <style>
+    ul.intro > li {
+        font-size: 36px;
+    }
+    </style>
+    <h2>Welcome and Introduction</h2>
+    <ul class="intro">
+        <li class="fragment">
+            <p>Who am I?</p>
+            <ul>
+                <li>Evert Timberg</li>
+                <li>Maintainer of Chart.js since Dec. 2014</li>
+            </ul>
+        </li>
+        <li class="fragment">
+            <p>Outline</p>
+            <ul>
+                <li>What is Chart.js</li>
+                <li>Creating a chart</li>
+                <li>Updating charts</li>
+            </ul>
+        </li>
+        <li class="fragment">
+            Slides available at <a href="http://everttimberg.io/presentation/introduction-to-chartjs">http://everttimberg.io/presentation/introduction-to-chartjs/</a>
+        </li>
+    </ul>
+</section>
+<section>
     <h2>What is Chart.js?</h2>
     <ul>
         <li class="fragment">Creates interactive charts</li>
@@ -205,5 +233,223 @@ let chart = new Chart(ctx, config);
     </section>
 </section>
 <section>
-    <h3>Updating Charts</h3>
+    <section>
+        <h3>Updating Charts</h3>
+        <p class="fragment">Charts can be updated on the fly</p>
+        <div class="fragment">
+            <pre><code>
+chart.data.datasets[0].data = [30, 50, 70, 75];
+chart.update();
+            </code></pre>
+        </div>
+        <p class="fragment">It's that easy!</p>
+    </section>
+    <section>
+        <h3>Demo</h3>
+        <div>
+            <canvas id="chart-data-update"></canvas>
+        </div>
+        <button id="randomize-data" class="chart">Randomize</button>
+        <style>
+        button.chart {
+            margin: 0;
+            padding: 20;
+            background: white;
+            border: 1px solid white;
+            font-size: 20px;
+        }
+        </style>
+        <script>
+        window.addEventListener('load', function() {
+            var ctx = document.getElementById('chart-data-update').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Data',
+                        data: [10, 0, 20, 30],
+                        borderColor: 'rgb(255, 99, 132)',
+                        fill: false,
+                        pointBackgroundColor: 'white'
+                    }],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr'] 
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                color: 'white',
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                color: 'white',
+                                drawTicks: false
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }]
+                    }
+                }
+            });
+            document.getElementById('randomize-data').addEventListener('click', function () {
+                chart.data.datasets[0].data = chart.data.datasets[0].data.map(function() {
+                    return Math.round(100 * Math.random());
+                });
+                chart.update();
+            });
+        });
+        </script>
+        <aside class="notes">
+            <ul>
+                <li>Can replace any part of the data object</li>
+                <li>Can replace the entire data object</li>
+            </ul>
+        </aside>
+    </section>
+    <section>
+        <p>Starting with v2.5, options can also be updated</p>
+        <div class="fragment">
+            <pre><code>
+chart.options.tooltips.mode = false;
+chart.update();
+            </code></pre>
+        </div>
+    </section>
+    <section>
+        <h3>Demo</h3>
+        <div>
+            <canvas id="chart-options-update"></canvas>
+        </div>
+        <div class="tooltip options">
+            <div class="tooltip option">
+                <label>Tooltip mode:</label>
+                <select id="tooltip-mode" class="chart">
+                    <option value="index">index</option>
+                    <option value="point">point</option>
+                    <option value="dataset">dataset</option>
+                    <option value="nearest">nearest</option>
+                    <option value="x">x</option>
+                    <option value="y">y</option>
+                </select>
+            </div>
+            <div class="tooltip option">
+                <label>Intersect?</label>
+                <input type="checkbox" id="tooltip-intersect" checked class="chart" />
+            </div>
+            <div class="tooltip option">
+                <label>Position mode</label>
+                <select id="tooltip-position" class="chart">
+                    <option value="average">average</option>
+                    <option value="nearest">nearest</option>
+                </select>
+            </div>
+        </div>
+        <style>
+        select.chart {
+            margin: 0;
+            padding: 20;
+            background: white;
+            border: 1px solid white;
+            font-size: 20px;
+        }
+        input.chart {
+        }
+        .tooltip.options {
+            display: flex;
+            flex-direction: row;
+        }
+        .tooltip.option {
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 200px;
+        }
+        </style>
+        <script>
+        window.addEventListener('load', function() {
+            var ctx = document.getElementById('chart-options-update').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'Data',
+                        data: [10, 0, 20, 30],
+                        borderColor: 'rgb(255, 99, 132)',
+                        fill: false,
+                        pointBackgroundColor: 'white'
+                    }, {
+                        label: 'Data',
+                        data: [70, 5, 20, 45],
+                        borderColor: 'rgb(54, 162, 235)',
+                        fill: false,
+                        pointBackgroundColor: 'white'
+                    }],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr'] 
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                color: 'white',
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }],
+                        yAxes: [{
+                            gridLines: {
+                                color: 'white',
+                                drawTicks: false
+                            },
+                            ticks: {
+                                fontColor: 'white'
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        mode: 'label',
+                        position: 'average',
+                        intersect: true,
+                        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                        bodyFontColor: 'black',
+                        titleFontColor: 'black'
+                    }
+                }
+            });
+            document.getElementById('tooltip-mode').addEventListener('change', function (e) {
+                chart.options.tooltips.mode = e.target.value;
+                chart.update();
+            });
+            document.getElementById('tooltip-intersect').addEventListener('change', function(e) {
+                chart.options.tooltips.intersect = e.target.checked;
+                chart.update();
+            });
+            document.getElementById('tooltip-position').addEventListener('change', function(e) {
+                chart.options.tooltips.position = e.target.value;
+                chart.update();
+            })
+        });
+        </script>
+        <aside class="notes">
+            <ul>
+                <li>Cannot update axis types (yet)</li>
+            </ul>
+        </aside>
+    </section>
+</section>
+<section>
+    <h3>For more Info</h3>
+    <p><a href="http://chartjs.org/docs" target="_blank">http://chartjs.org/docs</a></p>
+    <p><a href="https://github.com/chartjs/chart.js" target="_blank">https://github.com/chartjs/chart.js</a></p>
+    <p class="fragment">Questions?</p>
 </section>
