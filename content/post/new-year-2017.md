@@ -5,7 +5,7 @@ date = "2016-12-31T18:45:47-05:00"
 +++
 {{< script src="/js/Chart.min.js" >}}
 
-Chart.js has had an incredibly last year. In April, we successfully launched v2.0 culminating a year and a half of hard work. We've had a number of smaller releases after that, each of which has helped build on the incredibly interactivity that comes standard in v2. We also released our first new chart type in a long time; the horizontal bar chart. This was a long sought request, that fit in well with the work we did in v2.
+Chart.js has had an incredible last year. In April, we successfully launched v2.0 culminating a year and a half of hard work. We've had a number of smaller releases after that, each of which has helped build on the incredible interactivity that comes standard in v2. We also released our first new chart type in a long time; the horizontal bar chart. This was a long sought request, that fit in well with the work we did in v2.
 
 <br>
 Coupled with this work, we saw a dramatic increase in use this year, with monthly NPM installs going from ~20k to over 200k per month. It's amazing and humbling to see so many users choosing Chart.js for their projects.
