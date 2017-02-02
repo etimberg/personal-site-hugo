@@ -235,7 +235,7 @@ let chart = new Chart(ctx, config);
 <section>
     <section>
         <h3>Updating Charts</h3>
-        <p class="fragment">Charts can be updated on the fly</p>
+        <p class="fragment">Charts can be updated dynamically</p>
         <div class="fragment">
             <pre><code>
 chart.data.datasets[0].data = [30, 50, 70, 75];
