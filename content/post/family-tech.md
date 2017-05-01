@@ -20,7 +20,7 @@ Once you have LastPass installed, you'll get a redicon in your toolbar like the 
 <br />
 <br />
 ## uBlock Origin
-[uBlock Origin](https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en) is a program that blocks ads from running in your browser. Blocking ads means that websites will load faster and your browsing habits won't be tracked by a third party, and it reduces the chances of getting malware.
+[uBlock Origin](https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en) is a program that blocks ads from running in your browser. Blocking ads means that websites will load faster, your browsing habits won't be tracked by a third party, and it reduces the chances of getting malware.
 
 <br />
 Installing it is easy in Chrome. All you have to do is click the link to add it as an extension. From then on it should be activated and blocking ads. You can deactivate it in the future by going to `chrome://extensions` in a browsers tab.
