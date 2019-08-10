@@ -4,58 +4,58 @@ theme = "introduction"
 title = "Evert Timberg"
 
 [params]
-	author = "Evert Timberg"
-	title = "Evert Timberg"
-	subtitle = "Software developer"
-	mainImagePath = "/images/main_profile_pic_thumb.png"
+    themeStyle                   = "light"                 # Choose "light" or "dark"
+    favicon                      = "/img/fav.ico"          # Path to favicon file
+    showRSSButton                = false                   # Show rss button in navigation
+    fadeIn                       = true                    # Turn on/off the fade-in effect
+    fadeInIndex                  = false                   # Turn on/off the fade-in effect on the index page even if fade-in was otherwise turned off
+    dateFormat                   = "Jan 2, 2006"
+    email                        = "evert@everttimberg.io"   # E-mail address for contact section
+    # customCSS                    = ["foo.css"]             # Include custom css files placed under assets/
 
-[menu]
-	# Items shown on home page
-	[[menu.main]]
-		url = "/about/"
-		name = "About"
-		Weight = 0
-		Identifier = "about"
-	[[menu.main]]
-		url = "/project/"
-		name = "Projects"
-		Weight = 1
-		Identifier = "projects"
-	[[menu.main]]
-		url = "/album/"
-		name = "Photography"
-		Weight = 2
-		Identifier = "photography"
-	[[menu.main]]
-		url = "/post/"
-		name = "Blog"
-		Weight = 3
-		Identifier = "blog"
-	
-	# Side menu
-	[[menu.side]]
-		name = "About"
-		url = "/about/"
-		Weight = 0
+    # Configure the home page
+    [params.home]
+        introHeight              = "fullheight"            # Input either "medium" or "large" or "fullheight"
+        showLatest               = true                    # Show latest blog post summary
+        showAllPosts             = false                   # Set true to list all posts on home page, or set false to link to separate blog list page
+        numberOfProjectsToShow   = 3                       # Maximum number of projects to show on home page. Unset or comment out to show all projects
 
-	[[menu.side]]
-		name = "Projects"
-		url = "/project/"
-		Weight = 1
+        localTime                = true                    # Show your current local time in contact section
+        timeZone                 = "America/Toronto"   	   # Your timezone as in the TZ* column of this list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+        timeFormat               = "h:mm A"                # https://momentjs.com/docs/#/displaying/format/
+    [params.projects]
+        useTwoColumns            = false                   # Use a layout with two columns instead of three
 
-	[[menu.side]]
-		name = "Photography"
-		url = "/album/"
-		Weight = 2
-		Identifier = "photography"
+    # Share buttons on blog post pages
+    [params.share]
+        twitter                  = true
+        facebook                 = true
+        googlePlus               = true
+        pinterest                = true
 
-	[[menu.side]]
-		name = "Blog"
-		url = "/post/"
-		Weight = 3
+    # Social icons appear in introduction and contact section. Add as many more as you like.
+    # Icon pack "fab" includes social network icons, see: https://fontawesome.com/icons?d=gallery&s=brands&m=free
+    # Icon pack "fas" includes solid style icons, see: https://fontawesome.com/icons?d=gallery&s=solid&m=free
+    [[params.social]]
+        url = "https://github.com/etimberg"
+        icon = "github" # icon name without the 'fa-'
+        icon_pack = "fab"
+    [[params.social]]
+        url   = "https://twitter.com/EvertTimberg"
+        icon  = "twitter" # icon name without the 'fa-'
+        icon_pack = "fab"
+    [[params.social]]
+        url   = "https://linkedin.com/in/etimberg"
+        icon  = "linkedin-in" # icon name without the 'fa-'
+        icon_pack = "fab"
 
-# Social Media Links
-[Social]
-	github = "etimberg"
-	linkedin = "etimberg"
-	twitter = "EvertTimberg"
+
+# If you don't want to use the default menu, you can define one by yourself
+# [[menu.main]]
+#     name    = "Home"
+#     url     = "/"
+#     weight  = 0
+# [[menu.main]]
+#     name    = "Blog"
+#     url     = "/blog/"
+#     weight  = 1
