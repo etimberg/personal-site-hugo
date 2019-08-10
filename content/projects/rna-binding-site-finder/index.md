@@ -1,5 +1,6 @@
 ---
 title: "RNA Binding Site App"
+image: "dna.png"
 weight: 1
 ---
 
