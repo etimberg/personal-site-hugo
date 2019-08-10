@@ -1,6 +1,6 @@
 ---
-title: "About"
-image: "about_profile.png"
+title: "About Me"
+image: "bitmoji.png"
 weight: 5
 ---
 Hi, I'm **Evert Timberg**. I'm a software developer living in Toronto, Canada.
