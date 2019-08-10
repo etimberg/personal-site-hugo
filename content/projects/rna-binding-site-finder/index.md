@@ -1,5 +1,6 @@
 ---
 title: "RNA Binding Site App"
+external_link: "projects/rna-binding-site-finder"
 image: "dna.png"
 weight: 1
 ---

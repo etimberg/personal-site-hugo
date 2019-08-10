@@ -1,5 +1,6 @@
 ---
 title: "Chart.js"
+external_link: "/projects/chartjs"
 image: "logo.png"
 weight: 1
 ---
