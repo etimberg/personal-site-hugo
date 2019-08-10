@@ -1,6 +1,6 @@
 baseurl = "http://everttimberg.io/"
 languageCode = "en-us"
-theme = "evinson"
+theme = "introduction"
 title = "Evert Timberg"
 
 [params]
