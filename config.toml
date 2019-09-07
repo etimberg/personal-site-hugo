@@ -12,8 +12,6 @@ title = "Evert Timberg"
     fadeInIndex                  = false                   # Turn on/off the fade-in effect on the index page even if fade-in was otherwise turned off
     footerText                   = "Copyright Evert Timberg - 2019"
     dateFormat                   = "Jan 2, 2006"
-    #email                        = "evert@everttimberg.io"   # E-mail address for contact section
-    # customCSS                    = ["foo.css"]             # Include custom css files placed under assets/
 
     # Configure the home page
     [params.home]
