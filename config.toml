@@ -4,6 +4,7 @@ theme = "introduction"
 title = "Evert Timberg"
 
 [params]
+    description = "Evert Timberg, Software developer and architect in Toronto"
     themeStyle                   = "light"                 # Choose "light" or "dark"
     favicon                      = "/img/fav.ico"          # Path to favicon file
     showRSSButton                = false                   # Show rss button in navigation
