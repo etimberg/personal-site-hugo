@@ -1,5 +1,5 @@
 ---
-title: "Profiling Python Code with QCacheGrid"
+title: "Profiling Python Code with QCacheGrind"
 date: 2019-08-10T13:21
 tags: ["python", "profiling", "qcachegrind"]
 ---
