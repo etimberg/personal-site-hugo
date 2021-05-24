@@ -5,7 +5,7 @@ title = "Evert Timberg"
 
 [params]
     description = "Evert Timberg, Software developer and architect in Toronto"
-    themeStyle                   = "light"                 # Choose "light" or "dark"
+    themeStyle                   = "auto"                  # Choose "light" or "dark" or "auto"
     favicon                      = "/img/fav.ico"          # Path to favicon file
     showRSSButton                = false                   # Show rss button in navigation
     fadeIn                       = true                    # Turn on/off the fade-in effect
@@ -18,11 +18,12 @@ title = "Evert Timberg"
         introHeight              = "fullheight"            # Input either "medium" or "large" or "fullheight"
         showLatest               = true                    # Show latest blog post summary
         showAllPosts             = false                   # Set true to list all posts on home page, or set false to link to separate blog list page
+        allPostsArchiveFormat    = true                    # show all posts in an archive format
         numberOfProjectsToShow   = 3                       # Maximum number of projects to show on home page. Unset or comment out to show all projects
 
         localTime                = true                    # Show your current local time in contact section
         timeZone                 = "America/Toronto"   	   # Your timezone as in the TZ* column of this list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-        timeFormat               = "h:mm A"                # https://momentjs.com/docs/#/displaying/format/
+        timeFormat               = "en-US"                 # Language specific format to use
     [params.projects]
         imageSize                = "300x"                  # Size of the image on the single page template
         useTwoColumns            = false                   # Use a layout with two columns instead of three
