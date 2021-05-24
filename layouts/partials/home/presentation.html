@@ -1,0 +1,59 @@
+{{ with .Site.GetPage "/presentations" }}
+<div class="section" id="{{ .Title | urlize }}">
+    <!-- Begin Projects container -->
+    <div class="container">
+        <h2 class="title is-2 has-text-centered">
+            {{ .Title | markdownify }}
+        </h2>
+        <div class="section">
+            <div class="columns is-multiline">
+                {{ $totalProjects := (len .Pages) }}
+                {{ $numberOfProjectsToShow := .Site.Params.home.numberOfProjectsToShow | default $totalProjects }}
+                {{ range $index, $element := .Pages.ByWeight | first $numberOfProjectsToShow }}
+                {{ $width := "302x" }}
+                {{ $columWidth := "is-one-third" }}
+                {{ if .Site.Params.projects.useTwoColumns }}
+                  {{ $columWidth = "is-half" }}
+                  {{ $width = "490x" }}
+                {{ end}}
+                <div class="column {{ $columWidth }}">
+                    <div class="card" data-target="#project-{{ $index }}">
+                        {{ if .Resources.ByType "image" }}
+                        <div class="card-image">
+                            <figure class="image is-3by2">
+                                <a href="{{ .Permalink }}">
+                                    {{ with .Resources.ByType "image" }}
+                                    {{ range first 1 (sort . "Params.weight") }}
+                                    {{ $image := .Resize $width }}
+                                    <img class="card-thumbnail" src="{{ $image.Permalink }}" alt ="{{ $image.Name }}">
+                                    {{ end }}
+                                    {{ end }}
+                                </a>
+                            </figure>
+                        </div>
+                        {{ end }}
+                        <div class="card-content has-text-centered top-pad">
+                            <h1><a href="{{ .Permalink }}">
+                                {{ .Title | markdownify }}
+                            </a></h1>
+                            {{ if .Params.project_timeframe }}
+                            <p class="fa-xs">{{ .Params.project_timeframe }}</p>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ if lt $numberOfProjectsToShow $totalProjects }}
+        <div class="container has-text-centered top-pad">
+            <a href="{{ .Permalink }}">{{ i18n "index_projects_allProjects" . }}</a>
+        </div>
+        {{ end }}
+    </div>
+    <!-- End Projects container -->
+    {{ partial "top-icon.html" . }}
+</div>
+<!-- End Projects section -->
+<div class="container"><hr></div>
+{{ end }}
