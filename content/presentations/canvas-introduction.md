@@ -3,6 +3,7 @@ title: "Introduction to the HTML 5 Canvas"
 # date: 2021-06-02T14:00:00-04:00
 date: 2021-05-24T10:00:00-04:00
 draft: false
+summary: Introductory presentation to the HTML 5 Canvas 2D mode
 ---
 
 <section>
@@ -20,7 +21,7 @@ draft: false
     <li>Uses pixels<sup>*</sup> as coordinates</li>
   </ul>
   <canvas id="coordinates" style="background-color: white;"></canvas>
-  <script >
+  <script>
     function retinaScale(ctx, width, height) {
       const dpr = window.devicePixelRatio || 1;
       ctx.canvas.style.width = `${width}px`;
@@ -31,8 +32,6 @@ draft: false
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       }
     }
-  </script>
-  <script>
     (function() {
       const canvas = document.getElementById('coordinates');
       const ctx = canvas.getContext('2d');
