@@ -26,9 +26,9 @@ summary: Introductory presentation to the HTML 5 Canvas 2D mode
       const dpr = window.devicePixelRatio || 1;
       ctx.canvas.style.width = `${width}px`;
       ctx.canvas.style.height = `${height}px`;
+      ctx.canvas.width = width * dpr;
+      ctx.canvas.height = height * dpr;
       if (dpr !== 1) {
-        ctx.canvas.width = width * dpr;
-        ctx.canvas.height = height * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       }
     }
