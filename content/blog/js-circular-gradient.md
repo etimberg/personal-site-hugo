@@ -12,7 +12,7 @@ All WebGL programs consist of two shaders: a vertex shader and a fragment shader
 
 ## Vertex Shader
 
-{{< highlight glsl >}}
+```glsl
 
 attribute vec3 coordinates;
  
@@ -20,7 +20,7 @@ void main(void) {
     gl_Position = vec4(coordinates, 1.0);
 }
 
-{{< /highlight >}}
+```
 
 ## Fragment Shader
 
@@ -31,7 +31,7 @@ The bulk of the work is then the calculation for `percent` which determines how 
 The final step is to set the special `gl_FragColor` to the colour for the pixel. `mix` is a GLSL builtin that mixes the two input vectors in a linear fashion.
 
 
-{{< highlight glsl >}}
+```glsl
 // fragment shaders don't have a default precision so we need
 // to pick one. mediump is a good default
 precision mediump float;
@@ -50,13 +50,13 @@ void main(void) {
     gl_FragColor = mix(u_color1, u_color2, percent);
 }
 
-{{< /highlight >}}
+```
 
 ## Putting it Alltogether
 
 Now that we have both shaders written, we need to tie it together and render this on a canvas to test it out.
 
-{{< highlight javascript >}}
+```javascript
 
 const width = 500;
 const height = 500;
@@ -158,17 +158,17 @@ gl.viewport(0, 0, canvas.width, canvas.height);
 // Draw the square
 gl.drawElements(gl.TRIANGLE_FAN, indices.length, gl.UNSIGNED_SHORT, 0);
 
-{{< /highlight >}}
+```
 
 Now that we have the gradient rendering, if we want to use it as a fill for a 2d context call, we can create the `CanvasPattern` from the existing canvas
 
-{{< highlight javascript >}}
+```javascript
 
 const pattern = ctx.createPattern(canvas, "no-repeat");
 ctx.fillStyle = pattern;
 
 // Use the 2d APIs here
 
-{{< /highlight >}}
+```
 
 A live version of this code is at https://jsfiddle.net/dt4gn6v7/

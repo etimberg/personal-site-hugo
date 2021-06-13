@@ -17,7 +17,7 @@ The API gateway used the [requests](https://requests.readthedocs.io/en/master/) 
 
 There is a better way to solve this specific case that I built into `pycircuitbreaker`. The `circuit` decorator is able to take an optional `detect_error` parameter than can inspect the return value and determine if it is an error. This makes it easy to integrate with return-oriented programming, and while slightly less pythonic, allows seemless integration with the codebase I was working on.
 
-{{< highlight python3 >}}
+```python
 from pycircuitbreaker import circuit
 
 def detect_500(response) -> bool:
@@ -27,7 +27,7 @@ def detect_500(response) -> bool:
 def request():
     response = external_call()
     return response
-{{< /highlight >}}
+```
 
 ## Configurable Breaker Status Detection
 
@@ -44,13 +44,13 @@ But, if the service is degraded such that only 1/5 requests go through, there is
 
 There is a simple fix that can handle this case. Rather than allowing a single success to reset the error count, successful requests decrement the error count subject to a minimum of 0.
 
-{{< highlight python3 >}}
+```python
 def on_success(self):
     self.error_count = max(0, self.error_count - 1)
 
 def on_error(self):
     self.error_count += 1
-{{< /highlight >}}
+```
 
 In the request pattern above, the breaker will function as follows:
 

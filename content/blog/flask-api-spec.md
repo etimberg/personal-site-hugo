@@ -13,7 +13,7 @@ The major advantages of `apispec` over other libraries are that it supports Mars
 
 Documenting a route is as simple as providing a comment at the start of the Flask view function. In the example below, we have a simple web server that responds to a `/version` API with some JSON information regarding the service. The service also provides a `/spec` route that returns the OpenAPI documentation for the service.
 
-{{< highlight python3 >}}
+```python
 import os
 
 from apispec import APISpec
@@ -61,10 +61,8 @@ with app.test_request_context():
 @app.route("/spec")
 def get_apispec():
     return jsonify(spec.to_dict())
+```
 
-{{< /highlight >}}
-
-<br>
 Now, if we load up a swagger UI client and point it to our service we can see the definition for our API.
 
 ![Displayed API Spec](/img/swagger.png)
@@ -75,7 +73,7 @@ As Flask applications start to get bigger, it is common to switch to using [Blue
 
 To get around the need to pass the `APISpec` object to each instance of the Blueprint, you can partial the Blueprint constructor as shown below.
 
-{{< highlight python3 >}}
+```python
 from functools import partial
 from document_blueprint import DocumentedBlueprint as RawBlueprint
 
@@ -88,27 +86,26 @@ spec = APISpec(
 
 # Use this DocumentedBlueprint to avoid needing to set the spec everywhere
 DocumentedBlueprint = partial(RawBlueprint, spec=spec)
-{{< /highlight >}}
+```
 
 ## Use with Webargs
 
 The webargs project provides a more convenient way to use marshmallow than creating schema objects. To use it with apispec, the following helper can be used to create an apispec schema object that will appear in the Open API spec response.
 
-{{< highlight python3 >}}
+```python
 def create_schema_from_web_args(name: str, args: dict):
     klass = Schema.from_dict(args)
     spec.components.schema(name, schema=klass)
-{{< /highlight >}}
+```
 
 ## Custom Schemas
 
 In addition to Marshmallow, it can be useful to define custom schemas using YAML rather than being forced to use Marshmallow objects. A simple helper makes this possible.
 
-{{< highlight python3 >}}
+```python
 from yaml import safe_load
 
 def add_schema(spec: APISpec, name: str, schema_str: str):
     schema = safe_load(schema_str)
     spec.schema(name, schema)
-{{< /highlight >}}
-
+```

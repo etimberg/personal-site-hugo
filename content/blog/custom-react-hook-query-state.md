@@ -11,7 +11,7 @@ After implementing this on a couple of routes, I was able to find a common patte
 
 ## Implementation
 
-{{< highlight typescript >}}
+```ts
 import qs from 'query-string';
 import { useEffect, useMemo, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -54,25 +54,23 @@ export default function useQueryState<S>(
 
   return [stateValue, setState];
 };
-
-{{< /highlight >}}
+```
 
 ## Serializing Complex Values
 
 The 3rd parameter to the `useQueryState` hook allows for custom serialization of complex values. I used this to serialize [Luxon](https://moment.github.io/luxon/) `DateTime` objects. When selecting a date only, the time component doesn't matter so we can serialize to a `YYYY-MM-DD` format by passing the function below as the serializer.
 
-{{< highlight typescript >}}
+```ts
 function serializeDate(date: DateTime) {
   return date.toISODate();
 };
-
-{{< /highlight >}}
+```
 
 ## Usage
 
 Now, we can put it all together. Let's say we have some local state for a selected `id` and want that to appear in the query string as `?id=<value>`. All we need to do is replace `useState` with `useQueryState` and specify the parameter name we want to use.
 
-{{< highlight typescript >}}
+```ts
 import React from 'react';
 
 const OurComponent = () => {
@@ -82,7 +80,7 @@ const OurComponent = () => {
 
   ...
 };
-{{< /highlight >}}
+```
 
 ## Future Improvements
 

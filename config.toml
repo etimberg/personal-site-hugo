@@ -61,3 +61,20 @@ title = "Evert Timberg"
 #     name    = "Blog"
 #     url     = "/blog/"
 #     weight  = 1
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    # For styles, see https://xyproto.github.io/splash/docs/longer/all.html
+    style = "friendly"
+    tabWidth = 4
