@@ -120,7 +120,7 @@ export const ModalContainer = () => {
         setDownloading(true);
 
         try {
-          // For the purposes of the example, assume thiese functions exist
+          // For the purposes of the example, assume these functions exist
           const data = await getData();
           saveFile('file.txt', data);
           setError(''); // If we had an error before, make sure the error state is cleared
