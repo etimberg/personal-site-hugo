@@ -34,26 +34,31 @@ const state = {
 
 If this state is hoisted into a redux store for the page, it will be retained long after the modal that triggered the download action has been stopped being rendered. Care needs to be taken to ensure that in each case where the component is removed from the page, e.g. navigation, modal close, download success, that the reset action needs to be triggered. It is common to miss all of these cases leading to issues where the modal ishows stale data when used a second or third time.
 
-### Fully Public State and Sharing State Between Reducers
+### Fully Public State and Sharing State Between Action Creators
 
-In redux stores, the entire state object is publicly available to other reducers. A reducer is allowed to inspect the full state via a call to `getState()`. When a reducer does this, it usually this implies that the boundary of a reducer is wrong, however I have often seen `getState()` used anyway.
+In redux stores, the entire state object is publicly available to action creators. An action creator is allowed to inspect the full state via a call to `getState()`. When an action creator does this, it usually this implies that the boundary of a reducer is wrong, however I have often seen `getState()` used anyway.
 
-This is an issue because it can lead to situations where other reducers use state fields for reasons beyond their original intended use. This can lead to the introduction of subtle bugs if the reducer that owns the state changes an internal implementation. If we go back to the modal example from the previous section, suppose that a second reducer looks at the `error` field and considers only `null` values to be no error. If the reducer changes the implementation of the reset action such that the `error` field is reset to an empty string `''`, the second reducer will break in subtle ways.
+This is an issue because it can lead to situations where other reducers use state fields for reasons beyond their original intended use. This can lead to the introduction of subtle bugs if the reducer that owns the state changes an internal implementation. If we go back to the modal example from the previous section, suppose that a second module looks at the `error` field and considers only `null` values to be no error. If the reducer changes the implementation of the reset action such that the `error` field is reset to an empty string `''`, the second module will break in subtle ways.
 
 ### Listening to Actions from Another Reducer
 
-By design, redux sends every action to every reducer and listening to actions from another reducer is an accepted and encouraged pattern. However I recommend using this sparingly because it can cause a complexity increase, particuarly when asynchronous streams are sending events that interact with each other. An additional concern is that the reducer that owns the action changes the implementation slightly causing breaking changes to downstream code. To explore this, we're going to look at the interaction between two simple reducers that each load some data.
+By design, redux sends every action to every reducer and listening to actions from another reducer is an accepted and encouraged pattern. However I recommend using this sparingly because it can cause a complexity increase, particuarly when asynchronous streams are sending events that interact with each other. An additional concern is that the reducer that owns the action changes the implementation slightly causing breaking changes to downstream code.
 
-Todo Reducer:
+To explore this, we're going to look at a reducer that listens to an action from another reducer and explore some of the downsides. The reducer is responsible for maintaining a list of the user's todos which are loaded when the user logs in.
 
 ```javascript
+import { USER_LOGGED_OUT } from './auth';
+
 const initialState = {
-    loading: false,
-    todos: [],
+  loading: false,
+  todos: []
 }
 
 function todoReducer(state = initialState, action) {
   switch (action.type) {
+    case USER_LOGGED_OUT:
+      // On log-out, need to clear all the data from the previous user
+      return initialState;
     case TODOS_LOADING:
       return { ...state, loading: true };
     case TODOS_LOAD_SUCCESS:
@@ -64,33 +69,15 @@ function todoReducer(state = initialState, action) {
 }
 ```
 
-User Reducer:
-```javascript
-const initialState = {
-    loading: false,
-    users: [],
-}
+Now, let's consider what happens if a user logs in and then immediately logs out. The messages that get dispatched to the `todoReducer` could come in three different orders:
 
-function userReducer(state = initialState, action) {
-  switch (action.type) {
-    case USERS_LOADING:
-      return { ...state, loading: true };
-    case USERS_LOAD_SUCCESS:
-      return { ...state, loading: false, users: action.users };
-    default:
-      return state
-  }
-}
-```
+1. `TODOS_LOADING`, `TODOS_LOAD_SUCCESS`, `USER_LOGGED_OUT`
+2. `TODOS_LOADING`, `USER_LOGGED_OUT`, `TODOS_LOAD_SUCCESS`
+3. `USER_LOGGED_OUT`, `TODOS_LOADING`, `TODOS_LOAD_SUCCESS`
 
-In this simple system, there are 4 actions that can get dispatched however there are 6 possible orders that the messages can follow. As more messages are added that interact with each other this list becomes longer and it gets to the point where it is not feasible to test every combination. 
+The code written above only correctly handles the first case. If either of the other two occur, the previous user's data will be loaded into state. The best solution to this problem would be to not dispatch the `TODOS` actions once the user has logged out, however that often requires the "Sharing State" pattern to be followed and can make the action creators complicated and unwieldly. It also means that every spot that could dispatch the `USER_LOGGED_OUT` event needs to be updated to cancel the appropriate requests.
 
-1. `TODOS_LOADING`, `TODOS_LOAD_SUCCESS`, `USERS_LOADING`, `USERS_LOAD_SUCCESS`
-2. `TODOS_LOADING`, `USERS_LOADING`, `TODOS_LOAD_SUCCESS`, `USERS_LOAD_SUCCESS`
-3. `TODOS_LOADING`, `USERS_LOADING`, `USERS_LOAD_SUCCESS`, `TODOS_LOAD_SUCCESS`
-4. `USERS_LOADING`, `USERS_LOAD_SUCCESS`, `TODOS_LOADING`, `TODOS_LOAD_SUCCESS`
-5. `USERS_LOADING`, `TODOS_LOADING`, `USERS_LOAD_SUCCESS`, `TODOS_LOAD_SUCCESS`
-6. `USERS_LOADING`, `TODOS_LOADING`, `TODOS_LOAD_SUCCESS`, `USERS_LOAD_SUCCESS`
+Another risk is that the auth reducer starts listening to a new action, `USER_FORCED_LOGGED_OUT` to indicate a slightly different log out path. When that is added, the `todoReducer` could be missed and the data would not be cleared until the new action is also listened to.
 
 ## Modern Alternatives
 
@@ -257,6 +244,76 @@ export const UserTodoContextProvider = ({ children }) => {
 ```
 
 The beauty about the context based solution is that React will re-render the context provider whenever the `UserContext` or `TodoContext` change. Now, we don't have to deal with understanding why the data changed, just that it did. If either of the contexts are refactored, the `UserTodoContext` will still work without changes.
+
+### Revisiting Listening to Actions from Another Reducer
+
+Earlier, I showed the example of how a `USER_LOGGED_OUT` action could interact with two other actions that were loading the user's todo list. Let's explore how this could be made a lot simpler with contexts.
+
+```tsx
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+// Assume this exists and provides some info about if the user is logged in or not
+import { AuthContext } from './auth';
+
+interface Todo {
+  date: Date;
+  text: string;
+}
+
+interface UserTodoContextState {
+  getUserTodosForDate: (userID: number, date: Date) => UserTodo[];
+}
+
+const defaultContextState = {
+  todos: Todo[];
+};
+
+export const TodoContext = createContext<TodoContext>(defaultContextState);
+
+export const TodoContextProvider = ({ children }) => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const { isLoggedIn, userID } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // User has logged in, so we need to load the todos
+      const controller = new AbortController();
+
+      const fetchTodos = async () => {
+        try {
+          await fetch(`http://example.com/api/todos/${userID}`, { signal: controller.signal });
+        } catch {
+          setTodos([]);
+        }
+      };
+
+      // We don't await this because we want it to run async
+      fetchTodos();
+
+      // Cleanup function that will abort the fetch request.
+      // React will call this if the effect runs again which will happen
+      // if `isLoggedIn` transition from true to false
+      return () => controller.abort()
+    } else {
+      // User has logged out, clear the todo list
+      setTodos([]);
+    }
+  }, [isLoggedIn, userID])
+
+  return (
+    <TodoContext.Provider
+      value={{
+        todos,
+      }}
+    >
+      {children}
+    </TodoContext.Provider>
+  )
+}
+```
+
+This context is quite simple and yet provides a lot of functionality. Todos are automatically loaded when the user is logged in and once the user logs out, the todos are cleared. It doesn't matter how the user came to be logged out, just that they were which makes understanding this code easier.
 
 ## Closing Thoughts
 
