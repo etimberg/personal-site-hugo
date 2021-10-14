@@ -1,7 +1,7 @@
 ---
 title: "Thoughts on Redux"
 date: 2021-10-11T10:42:47-04:00
-draft: true
+draft: false
 tags: ["javascript", "react", "hooks", "redux"]
 ---
 
