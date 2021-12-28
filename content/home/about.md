@@ -5,7 +5,7 @@ weight: 5
 ---
 Hi, I'm **Evert Timberg**. I'm a software developer living in Toronto, Canada.
 
-I am currently a Staff Developer at [Top Hat](https://tophat.com) where I'm working to improve the lives of post-secondary students by changing how digital textbooks and courseware are delivered. At Top Hat, I support a number of development teams by guiding them  to build sustainable services using Python, React, and Cloud Native technologies.
+I am currently a Principal Developer at [Top Hat](https://tophat.com) where I'm working to improve the lives of post-secondary students by changing how digital textbooks and courseware are delivered. At Top Hat, I support a number of development teams by guiding them  to build sustainable services using Python, React, and Cloud Native technologies.
 
 Prior to Top hat, I was a Principal Architect at [Opus One Solutions](https://www.opusonesolutions.com/) where I developed software to help electrical utilities integrate renewable resources into the grid. Prior to that, I worked for National Instruments as a Software Developer. I started at NI soon after graduating from the University of Toronto in 2013 with a BASc in Electrical Engineering.
 
